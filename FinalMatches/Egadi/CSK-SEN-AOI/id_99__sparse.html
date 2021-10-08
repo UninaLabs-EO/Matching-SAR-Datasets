@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script type="text/javascript">
+        var oneTimeExecution = (function() {
+                    var executed = false;
+                    return function() {
+                        if (!executed) {
+                             var checkExist = setInterval(function() {
+                                       if ((document.getElementsByClassName('leaflet-top leaflet-right').length) || (!executed)) {
+                                          document.getElementsByClassName('leaflet-top leaflet-right')[0].style.display = "flex"
+                                          document.getElementsByClassName('leaflet-top leaflet-right')[0].style.flexDirection = "column"
+                                          document.getElementsByClassName('leaflet-top leaflet-right')[0].innerHTML += `
+    <div id='maplegend' class='maplegend'>
+      <div class='legend-title'>SAR Products</div>
+      <div class='legend-scale'>
+        <ul class='legend-labels'>
+        <li><span style='background:blue'></span>Sentinel-1</li><li><span style='background:red'></span>COSMO-SkyMed</li><li><span style='background:lightgreen'></span>AOI</li>
+        </ul>
+      </div>
+    </div>
+    `;
+                                          clearInterval(checkExist);
+                                          executed = true;
+                                       }
+                                    }, 100);
+                        }
+                    };
+                })();
+        oneTimeExecution()
+        </script>
+      
+
+    <style type='text/css'>
+      .maplegend {
+        z-index:9999;
+        float:right;
+        background-color: rgba(255, 255, 255, 1);
+        border-radius: 5px;
+        border: 2px solid #bbb;
+        padding: 10px;
+        font-size:36px;
+        positon: relative;
+      }
+      .maplegend .legend-title {
+        text-align: left;
+        margin-bottom: 15px;
+        font-weight: bold;
+        font-size: 90%;
+        }
+      .maplegend .legend-scale ul {
+        margin: 0;
+        margin-bottom: 5px;
+        padding: 0;
+        float: left;
+        list-style: none;
+        }
+      .maplegend .legend-scale ul li {
+        font-size: 70%;
+        list-style: none;
+        margin-left: 0;
+        line-height: 18px;
+        margin-bottom: 10px;
+        }
+      .maplegend ul.legend-labels li span {
+        display: block;
+        float: left;
+        height: 16px;
+        width: 30px;
+        margin-right: 5px;
+        margin-left: 0;
+        border: 0px solid #ccc;
+        }
+      .maplegend .legend-source {
+        font-size: 80%;
+        color: #777;
+        clear: both;
+        }
+      .maplegend a {
+        color: #777;
+        }
+    </style>
+    
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_cff7162183c842f6866001c552c1924e {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+</head>
+<body>    
+    
+            <div class="folium-map" id="map_cff7162183c842f6866001c552c1924e" ></div>
+        
+</body>
+<script>    
+    
+            var map_cff7162183c842f6866001c552c1924e = L.map(
+                "map_cff7162183c842f6866001c552c1924e",
+                {
+                    center: [39.166875842347764, 11.165424384952768],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 6.5,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_267baea4c7cc4337891bf9ab0f337fab = L.tileLayer(
+                "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"http://cartodb.com/attributions\"\u003eCartoDB\u003c/a\u003e, CartoDB \u003ca href =\"http://cartodb.com/attributions\"\u003eattributions\u003c/a\u003e", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_cff7162183c842f6866001c552c1924e);
+        
+    
+        function geo_json_ca5977c7b90a46fa93ebe24a062039bd_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "blue"};
+            }
+        }
+
+        function geo_json_ca5977c7b90a46fa93ebe24a062039bd_onEachFeature(feature, layer) {
+            layer.on({
+            });
+        };
+        var geo_json_ca5977c7b90a46fa93ebe24a062039bd = L.geoJson(null, {
+                onEachFeature: geo_json_ca5977c7b90a46fa93ebe24a062039bd_onEachFeature,
+            
+                style: geo_json_ca5977c7b90a46fa93ebe24a062039bd_styler,
+        });
+
+        function geo_json_ca5977c7b90a46fa93ebe24a062039bd_add (data) {
+            geo_json_ca5977c7b90a46fa93ebe24a062039bd
+                .addData(data)
+                .addTo(map_cff7162183c842f6866001c552c1924e);
+        }
+            geo_json_ca5977c7b90a46fa93ebe24a062039bd_add({"bbox": [9.30636, 38.293148, 12.6057, 40.311794], "features": [{"bbox": [9.30636, 38.293148, 12.6057, 40.311794], "geometry": {"coordinates": [[[9.711996, 38.293148], [9.30636, 39.913357], [12.270337, 40.311794], [12.6057, 38.692657], [9.711996, 38.293148]]], "type": "Polygon"}, "id": "0", "properties": {}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+        var popup_cfab4d62e27543fd8d51e4bcf1028c1e = L.popup({"maxWidth": "100%"});
+
+        
+            var html_a1a568f6df0f4dfebaf25909520029b8 = $(`<div id="html_a1a568f6df0f4dfebaf25909520029b8" style="width: 100.0%; height: 100.0%;">Sentinel</div>`)[0];
+            popup_cfab4d62e27543fd8d51e4bcf1028c1e.setContent(html_a1a568f6df0f4dfebaf25909520029b8);
+        
+
+        geo_json_ca5977c7b90a46fa93ebe24a062039bd.bindPopup(popup_cfab4d62e27543fd8d51e4bcf1028c1e)
+        ;
+
+        
+    
+    
+        var popup_24caca583682412f8bac27d4800b40a2 = L.popup({"autoClose": false, "maxWidth": "100%"});
+
+        
+            var html_aa411b075468499ea061b3e3077442cd = $(`<div id="html_aa411b075468499ea061b3e3077442cd" style="width: 100.0%; height: 100.0%;">S1A_IW_SLC__1SDV_20200531T171318_20200531T171345_032812_03CCF9_DE84</div>`)[0];
+            popup_24caca583682412f8bac27d4800b40a2.setContent(html_aa411b075468499ea061b3e3077442cd);
+        
+
+        geo_json_ca5977c7b90a46fa93ebe24a062039bd.bindPopup(popup_24caca583682412f8bac27d4800b40a2)
+        .openPopup();
+
+        
+    
+    
+        function geo_json_3196aa6744c04fcebdfcd9a1b2d8686c_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "red"};
+            }
+        }
+
+        function geo_json_3196aa6744c04fcebdfcd9a1b2d8686c_onEachFeature(feature, layer) {
+            layer.on({
+            });
+        };
+        var geo_json_3196aa6744c04fcebdfcd9a1b2d8686c = L.geoJson(null, {
+                onEachFeature: geo_json_3196aa6744c04fcebdfcd9a1b2d8686c_onEachFeature,
+            
+                style: geo_json_3196aa6744c04fcebdfcd9a1b2d8686c_styler,
+        });
+
+        function geo_json_3196aa6744c04fcebdfcd9a1b2d8686c_add (data) {
+            geo_json_3196aa6744c04fcebdfcd9a1b2d8686c
+                .addData(data)
+                .addTo(map_cff7162183c842f6866001c552c1924e);
+        }
+            geo_json_3196aa6744c04fcebdfcd9a1b2d8686c_add({"bbox": [12.56645, 37.295158, 13.29903, 38.510498], "features": [{"bbox": [12.56645, 37.295158, 13.29903, 38.510498], "geometry": {"coordinates": [[[13.0149, 37.295158], [12.56645, 37.362907], [12.8436, 38.510498], [13.29903, 38.44257], [13.0149, 37.295158]]], "type": "Polygon"}, "id": "0", "properties": {}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+        var popup_c2e6c04826b64289a21ef00d2a9fd8fa = L.popup({"maxWidth": "100%"});
+
+        
+            var html_b4b9cb6d38e94c8591b113b1719b2da3 = $(`<div id="html_b4b9cb6d38e94c8591b113b1719b2da3" style="width: 100.0%; height: 100.0%;">Sentinel</div>`)[0];
+            popup_c2e6c04826b64289a21ef00d2a9fd8fa.setContent(html_b4b9cb6d38e94c8591b113b1719b2da3);
+        
+
+        geo_json_3196aa6744c04fcebdfcd9a1b2d8686c.bindPopup(popup_c2e6c04826b64289a21ef00d2a9fd8fa)
+        ;
+
+        
+    
+    
+        var popup_4be25f88ac8f45bfb07f2ab7821d3094 = L.popup({"autoClose": false, "maxWidth": "100%"});
+
+        
+            var html_ab33d93aa9054b76a7bd7d3add0d5446 = $(`<div id="html_ab33d93aa9054b76a7bd7d3add0d5446" style="width: 100.0%; height: 100.0%;">1356523</div>`)[0];
+            popup_4be25f88ac8f45bfb07f2ab7821d3094.setContent(html_ab33d93aa9054b76a7bd7d3add0d5446);
+        
+
+        geo_json_3196aa6744c04fcebdfcd9a1b2d8686c.bindPopup(popup_4be25f88ac8f45bfb07f2ab7821d3094)
+        .openPopup();
+
+        
+    
+    
+        function geo_json_3ed2be20c1e84e20b6bb81f7a8757448_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillColor": "lightgreen"};
+            }
+        }
+
+        function geo_json_3ed2be20c1e84e20b6bb81f7a8757448_onEachFeature(feature, layer) {
+            layer.on({
+            });
+        };
+        var geo_json_3ed2be20c1e84e20b6bb81f7a8757448 = L.geoJson(null, {
+                onEachFeature: geo_json_3ed2be20c1e84e20b6bb81f7a8757448_onEachFeature,
+            
+                style: geo_json_3ed2be20c1e84e20b6bb81f7a8757448_styler,
+        });
+
+        function geo_json_3ed2be20c1e84e20b6bb81f7a8757448_add (data) {
+            geo_json_3ed2be20c1e84e20b6bb81f7a8757448
+                .addData(data)
+                .addTo(map_cff7162183c842f6866001c552c1924e);
+        }
+            geo_json_3ed2be20c1e84e20b6bb81f7a8757448_add({"bbox": [11.155519, 37.273336, 14.172363, 38.514646], "features": [{"bbox": [11.155519, 37.273336, 14.172363, 38.514646], "geometry": {"coordinates": [[[14.172363, 38.514646], [11.155519, 38.514646], [11.155519, 37.273336], [14.172363, 37.274053], [14.172363, 38.514646]]], "type": "Polygon"}, "id": "0", "properties": {}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+        var popup_701c70ffadaa4504a3ab94bc91b4ee0b = L.popup({"maxWidth": "100%"});
+
+        
+            var html_4f0d7a73d5fc4d979bbc9ff4c8b9ac8a = $(`<div id="html_4f0d7a73d5fc4d979bbc9ff4c8b9ac8a" style="width: 100.0%; height: 100.0%;">Sentinel</div>`)[0];
+            popup_701c70ffadaa4504a3ab94bc91b4ee0b.setContent(html_4f0d7a73d5fc4d979bbc9ff4c8b9ac8a);
+        
+
+        geo_json_3ed2be20c1e84e20b6bb81f7a8757448.bindPopup(popup_701c70ffadaa4504a3ab94bc91b4ee0b)
+        ;
+
+        
+    
+    
+        var popup_f546e34f52ae41aba34ea3b1ee4fd3e7 = L.popup({"autoClose": false, "maxWidth": "100%"});
+
+        
+            var html_b5dca8e486ef4dae812627435d1ed006 = $(`<div id="html_b5dca8e486ef4dae812627435d1ed006" style="width: 100.0%; height: 100.0%;">AOI</div>`)[0];
+            popup_f546e34f52ae41aba34ea3b1ee4fd3e7.setContent(html_b5dca8e486ef4dae812627435d1ed006);
+        
+
+        geo_json_3ed2be20c1e84e20b6bb81f7a8757448.bindPopup(popup_f546e34f52ae41aba34ea3b1ee4fd3e7)
+        .openPopup();
+
+        
+    
+</script>

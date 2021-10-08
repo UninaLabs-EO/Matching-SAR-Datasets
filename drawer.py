@@ -5,6 +5,11 @@ from shapely.geometry import Polygon, MultiPolygon, shape
 from shapely import wkt
 import folium
 import json
+
+import shapely
+from shapely.geometry import Polygon, MultiPolygon
+import matplotlib.pyplot as plt
+gpd.io.file.fiona.drvsupport.supported_drivers['KML'] = 'rw'
 # from shapely.ops import unary_union # unire poligons
 
 
@@ -178,6 +183,45 @@ def PlotProducts2( gdf: gpd.GeoDataFrame, j:int):
   AddPolygon_toMap(M[0], m, 'blue', Name=Names.SAO)
   AddPolygon_toMap(M[1], m, 'red', Name=str(Names.CSK))
   return m
+
+def PlotProducts_AOI( gdf: gpd.GeoDataFrame, j:int, aoi: Polygon)-> folium.Map:
+  P = gdf.iloc[j]['geometry']
+  Names = gdf.iloc[j][['SEN','CSK']]
+  M = list(P)
+  m = folium.Map(location=[ P.centroid.y, P.centroid.x], zoom_start=6.5, tiles='CartoDB positron') #location: latitude and longitude
+  m = add_categorical_legend(m, 'SAR Products',
+                              colors = ['blue','red','lightgreen'],
+                            labels = ['Sentinel-1', 'COSMO-SkyMed','AOI'])
+                            
+  AddPolygon_toMap(M[0], m, 'blue', Name=Names.SEN)
+  AddPolygon_toMap(M[1], m, 'red', Name=str(Names.CSK))
+  AddPolygon_toMap(aoi, m, 'lightgreen', Name='AOI')
+  return m
+
+
+def PlotProducts2_AOI( gdf: gpd.GeoDataFrame, j:int, aoi: Polygon):
+  P = gdf.iloc[j]['geometry']
+  Names = gdf.iloc[j][['SAO','CSK']]
+  M = list(P)
+  m = folium.Map(location=[ P.centroid.y, P.centroid.x], zoom_start=6.5, tiles='CartoDB positron') #location: latitude and longitude
+  m = add_categorical_legend(m, 'SAR Products',
+                              colors = ['blue','red','lightgreen'],
+                            labels = ['SAOCOM', 'COSMO-SkyMed','AOI'])
+                            
+  AddPolygon_toMap(M[0], m, 'blue', Name=Names.SAO)
+  AddPolygon_toMap(M[1], m, 'red', Name=str(Names.CSK))
+  AddPolygon_toMap(aoi, m, 'lightgreen', Name='AOI')
+  return m
+
+
+
+def get_poly_from_kml(path: str)-> Polygon:
+     # Filepath to KML file
+     fp = path
+     polys = gpd.read_file(fp, driver='KML')
+     pol = polys.geometry.values[0]
+     assert(len(polys)==1)
+     return pol
 
 
 
